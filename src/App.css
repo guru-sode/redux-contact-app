@@ -6,8 +6,13 @@ h1,h3 {
 }
 
 .contact-container{
-  width: 40%;
+  width: 30%;
   margin-left: 0%;
   float: left;
   clear: left;
+}
+
+.list-group{
+  font-family: 'Audiowide', cursive;
+  text-align: center;
 }
