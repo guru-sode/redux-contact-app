@@ -1,0 +1,83 @@
+[
+    {
+        "name": "Gurukiran",
+        "numbers": {
+            "mobile": "9972718800",
+            "home": "08000000"
+        },
+        "birthday": "25/04/1995"
+    },
+    {
+        "name": "Ajith",
+        "numbers": {
+            "mobile": "9481567378",
+            "home": "08000001"
+        },
+        "birthday": "15/03/1995"
+    },
+    {
+        "name": "Batman",
+        "numbers": {
+            "mobile": "9481152398",
+            "home": "08000002"
+        },
+        "birthday": "11/07/1962"
+    },
+    {
+        "name": "Spiderman",
+        "numbers": {
+            "mobile": "9632780830",
+            "home": "08000003"
+        },
+        "birthday": "28/11/1986"
+    },
+    {
+        "name": "Ironman",
+        "numbers": {
+            "mobile": "8762767288",
+            "home": "08000004"
+        },
+        "birthday": "02/10/2004"
+    },
+    {
+        "name": "Superman",
+        "numbers": {
+            "mobile": "7259972260",
+            "home": "08000005"
+        },
+        "birthday": "23/08/1970"
+    },
+    {
+        "name": "Loki",
+        "numbers": {
+            "mobile": "9449746923",
+            "home": "08000006"
+        },
+        "birthday": "16/04/2008"
+    },
+    {
+        "name": "Joker",
+        "numbers": {
+            "mobile": "8776224569",
+            "home": "08000007"
+        },
+        "birthday": "07/12/1967"
+    },
+    {
+        "name": "Sheldon",
+        "numbers": {
+            "mobile": "7259972599",
+            "home": "08000008"
+        },
+        "birthday": "01/01/2008"
+    },
+    {
+        "name": "Penny",
+        "numbers": {
+            "mobile": "8861567378",
+            "home": "08000009"
+        },
+        "birthday": "19/06/2009"
+    }
+    
+]
