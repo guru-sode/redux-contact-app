@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import data from './data/contactList.json';
 import { BrowserRouter, Route } from 'react-router-dom';
 import {NavLink} from 'react-router-dom';
+import ContactDetails from './ContactDetails';
 
 
 class ContactList extends Component {
@@ -24,10 +25,9 @@ class ContactList extends Component {
     const names = [];
     for (let i = 0; i < this.state.name.length; i++) {
       names.push(
-      <NavLink to={`/${this.state.name[i]}`}>
+      <NavLink to={`/${this.state.name[i]}`} key={this.state.name[i]}>
               <li
           className="list-group-item"
-          onClick={this.handleClick.bind(this, this.state.name[i])}
           key={this.state.name[i]}
         >
           {this.state.name[i]}
@@ -37,10 +37,6 @@ class ContactList extends Component {
     }
     return names;
   }
-  handleClick(key){
-
-  }
-
 
   render() {
     return (
@@ -55,9 +51,7 @@ class ContactList extends Component {
         </div>
         <div className="conatct-details-container">
         <h3>Contact details</h3>
-        <Route path='/Gurukiran' render={()=>{
-            return <h1>Hello</h1>
-        }}></Route>
+        <Route path='/:name' component={ContactDetails}></Route>
         </div>
       </div>
       </BrowserRouter>
