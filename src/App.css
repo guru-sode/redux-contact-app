@@ -5,6 +5,10 @@ h1,h3 {
   text-align: center;
 }
 
+.container{
+  width: 100%;
+}
+
 .contact-container{
   width: 30%;
   margin-left: 0%;
