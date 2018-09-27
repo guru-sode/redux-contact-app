@@ -20,3 +20,9 @@ h1,h3 {
   font-family: 'Audiowide', cursive;
   text-align: center;
 }
+
+.contact-details-container{
+  float: right;
+  width: 50%;
+  background-color: red;
+}
