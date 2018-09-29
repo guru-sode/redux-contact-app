@@ -51,11 +51,12 @@ span.info {
 }
 
 .btn-warning{
-  margin-left: 5%;
-  width: 45%;
+  margin-left: 25%;
+  width: 50%;
 }
 
-.btn-danger{
-  margin-left: 2%;
-  width: 45%;
+.btn-success{
+  margin-left: 25%;
+  width: 50%;
+  margin-bottom: 2%;
 }

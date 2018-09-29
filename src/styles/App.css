@@ -25,3 +25,13 @@ h1,h3 {
   float: right;
   width: 50%;
 }
+
+.fa-trash-o{
+  font-size:20px;
+  color:red;
+  float: right;
+}
+
+.fa-plus-circle{
+  float: right;
+}
