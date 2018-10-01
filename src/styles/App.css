@@ -24,6 +24,7 @@ h1,h3 {
 .contact-details-container{
   float: right;
   width: 50%;
+  clear: right;
 }
 
 .fa-trash-o{

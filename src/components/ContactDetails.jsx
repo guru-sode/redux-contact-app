@@ -51,6 +51,7 @@ class ContactDetails extends Component {
       mobile: mobile,
       birthday: birthday
     });
+    console.log(this.props.match);
   }
 
   getIndex(name) {
@@ -103,6 +104,7 @@ class ContactDetails extends Component {
     return (
       <div id="vcard">
         <div id="card-content">
+        <h3>Contact details</h3>
           <div id="profile">
             <span className="avatar">
               <span className="typicons-user icon" />
