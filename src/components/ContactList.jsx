@@ -3,6 +3,8 @@ import data from '../data/contactList.json';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import ContactDetails from './ContactDetails';
+import ReactDOM from 'react-dom';
+import '../styles/App.css';
 
 
 class ContactList extends Component {
@@ -12,15 +14,27 @@ class ContactList extends Component {
       name: [],
       home: '',
       mobile: '',
-      birthday: ''
+      birthday: '',
     };
   }
 
   componentDidMount = () => {
     const personName = [];
-    data.map(person => personName.push(person.name));
+    const homeNumber=[];
+    const mobileNumber=[];
+    const personBirthday=[];
+    data.map(person => {
+      personName.push(person.name);
+      homeNumber.push(person.numbers.home);
+      mobileNumber.push(person.numbers.mobile);
+      personBirthday.push(person.birthday);
+      return null;
+    });
     this.setState({
-      name: personName
+      name: personName,
+      home: homeNumber,
+      mobile:mobileNumber,
+      birthday:personBirthday
     });
   };
 
@@ -58,8 +72,46 @@ class ContactList extends Component {
     return names;
   }
 
-  createContact(){
-    console.log('create contact');
+  addSubmit=(event)=>{
+    console.log('submit clicked');
+    const formElement=document.getElementById('addForm');
+    const values=[];
+    for(let i=0;i<formElement.length;i++){
+      values.push(formElement[i].value);
+    }
+    event.preventDefault();
+    console.log(values[0]);
+    this.setState({
+      name:values[0],
+      birthday:values[1],
+      home:values[2],
+      mobile:values[3]
+    });
+  }
+
+  createContact=()=>{
+    ReactDOM.render(<div className="container">
+    <form onSubmit={this.handleSubmit} id="addForm">
+      <div className="form-group">
+        <label>Name:</label>
+        <input type="name" className="form-control" id="name" placeholder="Enter name" name="name" />
+      </div>
+      <div className="form-group">
+        <label>Birthday:</label>
+        <input type="birthday" className="form-control" id="birthday" placeholder="Enter birthday" name="birthday" />
+      </div>
+      <div className="form-group">
+        <label>Home:</label>
+        <input type="home" className="form-control" id="home" placeholder="Enter home number" name="home" />
+      </div>
+      <div className="form-group">
+        <label>Mobile:</label>
+        <input type="mobile" className="form-control" id="mobile" placeholder="Enter mobile number" name="mobile" />
+      </div>
+      <button type="submit" className="btn btn-success" onClick={this.addSubmit}>Submit</button>
+    </form>
+  </div>,document.getElementById("root"));
+
   }
 
   render() {
@@ -77,6 +129,7 @@ class ContactList extends Component {
             <h3>Contact details</h3>
             <Route path="/:name" component={ContactDetails} />
           </div>
+          <div className="add-contact"></div>
         </div>
       </BrowserRouter>
     );

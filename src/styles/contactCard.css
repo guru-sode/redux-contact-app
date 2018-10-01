@@ -22,12 +22,11 @@
 #profile {
   height: 100%;
   border-bottom: solid 1px rgba(255,255,255,.2);
-}
-#profile {
   padding-top: 50px;
   text-align: center;
   overflow: hidden;
 }
+
 span.avatar span.icon{
   display: inline-block;
   color: black;
