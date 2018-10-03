@@ -3,18 +3,18 @@ import '../styles/add.css';
 
 class AddContact extends Component {
 
-    constructor(props) {
-        super(props);
+    // constructor(props) {
+    //     super(props);
 
-      }
+    //   }
       addSubmit = event => {
+        event.preventDefault();
         console.log('submit clicked');
         const formElement = document.getElementById('addForm');
         const values = [];
         for (let i = 0; i < formElement.length; i++) {
           values.push(formElement[i].value);
         }
-        event.preventDefault();
         const add = {
           name: values[0],
           numbers: {
@@ -23,14 +23,11 @@ class AddContact extends Component {
           },
           birthday: values[1]
         };
-        this.setState({
-            dataArray:this.props.dataArray.concat(add),
-            name:this.props.name.concat(values[0])
-        });
+        
+        this.props.addContact(add);
       };
 
     render() { 
-        console.log(this.props);
         return (
             <div id="add-contact">
             <h3>Add Contact</h3>

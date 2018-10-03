@@ -14,8 +14,16 @@ class ContactList extends Component {
       name: [],
       data: []
     };
+    this.addContact = this.addContact.bind(this);
   }
 
+  addContact(data){
+    let name=this.state;
+   name.name.push(data.name);
+   name.data.push(data);
+   console.log(name);
+   this.setState(name);
+  }
   componentDidMount = () => {
     const personName = [];
     data.map(person => personName.push(person.name));
@@ -79,7 +87,7 @@ class ContactList extends Component {
           <Route
             path="/contact/add"
             render={props => (
-              <AddContact {...props} dataArray={this.state.data} names={this.state.name}/>
+              <AddContact {...props} dataArray={this.state.data} names={this.state.name} addContact={this.addContact}/>
             )}
           />
           <div className="conatct-details-container">

@@ -34,7 +34,7 @@ class ContactDetails extends Component {
       });
   };
 
-  componentDidMount=()=>{
+  componentDidMount = () => {
     const index = this.getIndex(this.props.match.params.name);
     let name;
     let home;
@@ -51,8 +51,7 @@ class ContactDetails extends Component {
       mobile: mobile,
       birthday: birthday
     });
-    console.log(this.props.match);
-  }
+  };
 
   getIndex(name) {
     let index;
@@ -65,46 +64,88 @@ class ContactDetails extends Component {
     return index;
   }
 
-  editContact(){
+  editContact() {
     console.log('submit');
   }
 
-  handleChangeName=(event)=>{
+  handleChangeName = event => {
+    event.preventDefault();
     console.log(event.target.value);
     this.setState({
-      name:event.target.value
-    })
+      name: event.target.value
+    });
+  };
+  submit(e) {
+    console.log('submit');
+    e.preventDefault();
   }
 
-  edit=()=>{
-    ReactDOM.render(<div className="container">
-    <form>
-      <div className="form-group">
-        <label>Name:</label>
-        <input type="name" className="form-control" id="name" placeholder="Enter name" name="name" defaultValue={this.state.name} onChange={this.handleChangeName} />
-      </div>
-      <div className="form-group">
-        <label>Birthday:</label>
-        <input type="birthday" className="form-control" id="birthday" placeholder="Enter birthday" name="birthday" defaultValue={this.state.birthday} onChange={this.handleChangeBirth} />
-      </div>
-      <div className="form-group">
-        <label>Home:</label>
-        <input type="home" className="form-control" id="home" placeholder="Enter home number" name="home" defaultValue={this.state.home} onChange={this.handleChangeHome}/>
-      </div>
-      <div className="form-group">
-        <label>Mobile:</label>
-        <input type="mobile" className="form-control" id="mobile" placeholder="Enter mobile number" name="mobile" defaultValue={this.state.mobile}  onChange={this.handleChangeMobile}/>
-      </div>
-      <button type="submit" className="btn btn-success" >Submit</button>
-    </form>
-  </div>,document.getElementById('edit-form'));
-  }
+  edit = () => {
+    ReactDOM.render(
+      <div className="container">
+        <form onSubmit={this.submit}>
+          <div className="form-group">
+            <label>Name:</label>
+            <input
+              type="name"
+              className="form-control"
+              id="name"
+              placeholder="Enter name"
+              name="name"
+              defaultValue={this.state.name}
+              onChange={this.handleChangeName}
+            />
+          </div>
+          <div className="form-group">
+            <label>Birthday:</label>
+            <input
+              type="birthday"
+              className="form-control"
+              id="birthday"
+              placeholder="Enter birthday"
+              name="birthday"
+              defaultValue={this.state.birthday}
+              onChange={this.handleChangeBirth}
+            />
+          </div>
+          <div className="form-group">
+            <label>Home:</label>
+            <input
+              type="home"
+              className="form-control"
+              id="home"
+              placeholder="Enter home number"
+              name="home"
+              defaultValue={this.state.home}
+              onChange={this.handleChangeHome}
+            />
+          </div>
+          <div className="form-group">
+            <label>Mobile:</label>
+            <input
+              type="mobile"
+              className="form-control"
+              id="mobile"
+              placeholder="Enter mobile number"
+              name="mobile"
+              defaultValue={this.state.mobile}
+              onChange={this.handleChangeMobile}
+            />
+          </div>
+          <button type="submit" className="btn btn-success">
+            Submit
+          </button>
+        </form>
+      </div>,
+      document.getElementById('edit-form')
+    );
+  };
 
   render() {
     return (
       <div id="vcard">
         <div id="card-content">
-        <h3>Contact details</h3>
+          <h3>Contact details</h3>
           <div id="profile">
             <span className="avatar">
               <span className="typicons-user icon" />
@@ -113,15 +154,19 @@ class ContactDetails extends Component {
                 <br />
                 {this.state.birthday}
                 <br />
-                Home:{this.state.home}
+                Home:
+                {this.state.home}
                 <br />
-                Mobile:{this.state.mobile}
+                Mobile:
+                {this.state.mobile}
               </span>
             </span>
           </div>
         </div>
-      <button type="button" className="btn btn-warning" onClick={this.edit}>Edit</button>
-      <div id="edit-form"></div>
+        <button type="button" className="btn btn-warning" onClick={this.edit}>
+          Edit
+        </button>
+        <div id="edit-form" />
       </div>
     );
   }
