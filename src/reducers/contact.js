@@ -24,6 +24,22 @@ const contactReducer = (state = initialState, action) => {
             ...state,
             name: newData
         }
+        case 'ADD_CONTACT':
+        let newName;
+        let addData;
+        if(action.payload.name!==undefined && action.payload.data!==undefined){
+           newName=state.name.concat(action.payload.name);
+           addData=state.data.concat(action.payload.data);
+        }
+        else{
+          newName=state.name;
+          addData=state.data;
+        }
+        return{
+          ...state,
+          name:newName,
+          data:addData
+        }
     default:
       return state;
   }

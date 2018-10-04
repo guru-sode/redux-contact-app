@@ -148,13 +148,6 @@ export class ContactList extends Component {
     this.props.DELETE_NAME(name);
   }
 
-  deleteName(name) {
-    return {
-      type: 'DELETE_NAME',
-      payload: name
-    };
-  }
-
   render() {
     return (
       <BrowserRouter>

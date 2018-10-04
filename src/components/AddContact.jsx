@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import '../styles/add.css';
+import { connect } from 'react-redux';
 
 class AddContact extends Component {
 
-    // constructor(props) {
-    //     super(props);
-
-    //   }
       addSubmit = event => {
         event.preventDefault();
         console.log('submit clicked');
+        this.props.ADD_CONTACT(event);
         const formElement = document.getElementById('addForm');
         const values = [];
         for (let i = 0; i < formElement.length; i++) {
@@ -23,9 +21,8 @@ class AddContact extends Component {
           },
           birthday: values[1]
         };
-        
-        this.props.addContact(add);
-      };
+        this.props.ADD_CONTACT(values[0],add)
+      }
 
     render() { 
         return (
@@ -86,5 +83,24 @@ class AddContact extends Component {
         );
     }
 }
+const mapStateToProps = state => {
+  return {
+    name: state.name,
+    data: state.data
+  };
+};
  
-export default AddContact;
+const mapDispatchToProps = dispatch => {
+  return {
+    ADD_CONTACT: (name,add)=>dispatch({type:'ADD_CONTACT',
+    payload:{
+      name:name,
+      data:add
+    }})
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddContact);
