@@ -3,11 +3,14 @@ import '../styles/add.css';
 import { connect } from 'react-redux';
 
 class AddContact extends Component {
+    constructor(props){
+      super(props);
+      this.addSubmit=this.addSubmit.bind(this);
+    }
 
-      addSubmit = event => {
+      addSubmit(event){
         event.preventDefault();
         console.log('submit clicked');
-        this.props.ADD_CONTACT(event);
         const formElement = document.getElementById('addForm');
         const values = [];
         for (let i = 0; i < formElement.length; i++) {
@@ -71,7 +74,7 @@ class AddContact extends Component {
                   />
                 </div>
                 <button
-                  type="submit"
+                  type=""
                   className="btn btn-success"
                   onClick={this.addSubmit}
                 >
@@ -92,7 +95,7 @@ const mapStateToProps = state => {
  
 const mapDispatchToProps = dispatch => {
   return {
-    ADD_CONTACT: (name,add)=>dispatch({type:'ADD_CONTACT',
+    ADD_CONTACT: (name,add) =>dispatch({type:'ADD_CONTACT',
     payload:{
       name:name,
       data:add
