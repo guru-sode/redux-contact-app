@@ -5,7 +5,6 @@
 // import '../styles/App.css';
 // import AddContact from './AddContact';
 
-
 // class ContactList extends Component {
 //   constructor() {
 //     super();
@@ -113,20 +112,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import AddContact from './AddContact';
 
 export class ContactList extends Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.getNames =this.getNames.bind(this); 
-    this.displayNames = this.displayNames.bind(this)
+    this.getNames = this.getNames.bind(this);
+    this.displayNames = this.displayNames.bind(this);
   }
-  getNames(){
+  getNames() {
     return this.props.name;
-  } 
+  }
 
-  displayNames(){
-    let temp = this.getNames()
+  displayNames() {
+    let temp = this.getNames();
     const names = [];
     for (let i = 0; i < temp.length; i++) {
       names.push(
@@ -136,7 +135,7 @@ export class ContactList extends Component {
           </NavLink>
           <i
             className="fa fa-trash-o"
-            // onClick={this.handleDelete.bind(this, this.state.name[i])}
+            onClick={this.handleDelete.bind(this, temp[i])}
           />
         </li>
       );
@@ -144,37 +143,55 @@ export class ContactList extends Component {
     return names;
   }
 
+  handleDelete(name) {
+    console.log('In handle delete', name);
+    this.props.DELETE_NAME(name);
+  }
+
+  deleteName(name) {
+    return {
+      type: 'DELETE_NAME',
+      payload: name
+    };
+  }
+
   render() {
     return (
       <BrowserRouter>
-      <div>
-      <h1>Contact Manager</h1>
-           <div className="contact-container">
-             <h3>
-               Contacts{' '}
-               <NavLink to="/contact/add">
-               <i className="fa fa-plus-circle" />
+        <div>
+          <h1>Contact Manager</h1>
+          <div className="contact-container">
+            <h3>
+              Contacts{' '}
+              <NavLink to="/contact/add">
+                <i className="fa fa-plus-circle" />
               </NavLink>
-             </h3>
-             <ul className="list-group">{this.displayNames()}</ul>
-           </div>
-      </div>
+            </h3>
+            <ul className="list-group">{this.displayNames()}</ul>
+          </div>
+          <Route
+            path="/contact/add" component={AddContact}/>
+        </div>
       </BrowserRouter>
-    )
+    );
   }
 }
 
-const mapStateToProps = (state) => {
-  return{
-    name : state.name,
-    data : state.data,
-  }
-}
+const mapStateToProps = state => {
+  return {
+    name: state.name,
+    data: state.data
+  };
+};
 
-const mapDispatchToProps = (dispatch)=>{
-  return{
-    FETCH_NAMES : dispatch({type:'FETCH_NAMES'})
-  }
-}
+const mapDispatchToProps = dispatch => {
+  return {
+    FETCH_NAMES: dispatch({ type: 'FETCH_NAMES' }),
+    DELETE_NAME: name => dispatch({ type: 'DELETE_NAME', payload: name })
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ContactList);
