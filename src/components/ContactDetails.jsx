@@ -1,89 +1,50 @@
 import React, { Component } from 'react';
-import data from '../data/contactList.json';
 import '../styles/contactCard.css';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 
 class ContactDetails extends Component {
-  constructor() {
-    super();
-    this.state = {
-      name: '',
-      home: '',
-      mobile: '',
-      birthday: ''
-    };
+  constructor(props){
+    super(props);
+    this.submit=this.submit.bind(this);
   }
 
   componentDidUpdate = () => {
-    const index = this.getIndex(this.props.match.params.name);
-    let name;
-    let home;
-    let mobile;
-    let birthday;
-    let person = data[index];
-    name = person.name;
-    birthday = person.birthday;
-    home = person.numbers.home;
-    mobile = person.numbers.mobile;
-    if (this.state.name !== name)
-      this.setState({
-        name: name,
-        home: home,
-        mobile: mobile,
-        birthday: birthday
-      });
+    this.props.CONTACT_DETAILS(this.props.match.params.name);
   };
 
   componentDidMount = () => {
-    const index = this.getIndex(this.props.match.params.name);
-    let name;
-    let home;
-    let mobile;
-    let birthday;
-    let person = data[index];
-    name = person.name;
-    birthday = person.birthday;
-    home = person.numbers.home;
-    mobile = person.numbers.mobile;
-    this.setState({
-      name: name,
-      home: home,
-      mobile: mobile,
-      birthday: birthday
-    });
+    this.props.CONTACT_DETAILS(this.props.match.params.name);
   };
-
-  getIndex(name) {
-    let index;
-    data.map((person, i) => {
-      if (name === person.name) {
-        index = i;
-      }
-      return index;
-    });
-    return index;
-  }
 
   editContact() {
     console.log('submit');
   }
 
-  handleChangeName = event => {
-    event.preventDefault();
-    console.log(event.target.value);
-    this.setState({
-      name: event.target.value
-    });
-  };
+
   submit(e) {
-    console.log('submit');
     e.preventDefault();
+    const formElement = document.getElementById('editForm');
+    const values = [];
+    for (let i = 0; i < formElement.length; i++) {
+      values.push(formElement[i].value);
+    }
+    const add = {
+      name: values[0],
+      numbers: {
+        home: values[2],
+        mobile: values[3]
+      },
+      birthday: values[1]
+    };
+    console.log(this.props.match.params.name)
+    this.props.EDIT_CONTACT(add,this.props.match.params.name)
   }
 
   edit = () => {
     ReactDOM.render(
       <div className="container">
-        <form onSubmit={this.submit}>
+        <form id="editForm">
           <div className="form-group">
             <label>Name:</label>
             <input
@@ -92,8 +53,7 @@ class ContactDetails extends Component {
               id="name"
               placeholder="Enter name"
               name="name"
-              defaultValue={this.state.name}
-              onChange={this.handleChangeName}
+              defaultValue={this.props.match.params.name}
             />
           </div>
           <div className="form-group">
@@ -104,8 +64,7 @@ class ContactDetails extends Component {
               id="birthday"
               placeholder="Enter birthday"
               name="birthday"
-              defaultValue={this.state.birthday}
-              onChange={this.handleChangeBirth}
+              defaultValue={this.props.birthday}
             />
           </div>
           <div className="form-group">
@@ -116,8 +75,7 @@ class ContactDetails extends Component {
               id="home"
               placeholder="Enter home number"
               name="home"
-              defaultValue={this.state.home}
-              onChange={this.handleChangeHome}
+              defaultValue={this.props.home}
             />
           </div>
           <div className="form-group">
@@ -128,11 +86,10 @@ class ContactDetails extends Component {
               id="mobile"
               placeholder="Enter mobile number"
               name="mobile"
-              defaultValue={this.state.mobile}
-              onChange={this.handleChangeMobile}
+              defaultValue={this.props.mobile}
             />
           </div>
-          <button type="submit" className="btn btn-success">
+          <button type="submit" className="btn btn-success" onClick={this.submit}>
             Submit
           </button>
         </form>
@@ -150,15 +107,15 @@ class ContactDetails extends Component {
             <span className="avatar">
               <span className="typicons-user icon" />
               <span className="info">
-                {this.state.name}
+                {this.props.match.params.name}
                 <br />
-                {this.state.birthday}
+                {this.props.birthday}
                 <br />
                 Home:
-                {this.state.home}
+                {this.props.home}
                 <br />
                 Mobile:
-                {this.state.mobile}
+                {this.props.mobile}
               </span>
             </span>
           </div>
@@ -172,4 +129,24 @@ class ContactDetails extends Component {
   }
 }
 
-export default ContactDetails;
+const mapStateToProps = state => {
+  return {
+    personName: state.particularName,
+    home: state.home,
+    mobile:state.mobile,
+    birthday:state.birthday
+  };
+};
+ 
+const mapDispatchToProps = dispatch => {
+  return {
+    CONTACT_DETAILS: (name) =>dispatch({type:'CONTACT_DETAILS',
+    payload:name}),
+    EDIT_CONTACT: (add,personName) => dispatch({type:'EDIT_CONTACT',payload:[add,personName]})
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ContactDetails);

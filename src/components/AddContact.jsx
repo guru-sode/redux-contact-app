@@ -10,7 +10,6 @@ class AddContact extends Component {
 
       addSubmit(event){
         event.preventDefault();
-        console.log('submit clicked');
         const formElement = document.getElementById('addForm');
         const values = [];
         for (let i = 0; i < formElement.length; i++) {

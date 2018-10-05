@@ -113,6 +113,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import AddContact from './AddContact';
+import ContactDetails from './ContactDetails';
 
 export class ContactList extends Component {
   constructor(props) {
@@ -144,7 +145,6 @@ export class ContactList extends Component {
   }
 
   handleDelete(name) {
-    console.log('In handle delete', name);
     this.props.DELETE_NAME(name);
   }
 
@@ -155,7 +155,7 @@ export class ContactList extends Component {
           <h1>Contact Manager</h1>
           <div className="contact-container">
             <h3>
-              Contacts{' '}
+              Contacts
               <NavLink to="/contact/add">
                 <i className="fa fa-plus-circle" />
               </NavLink>
@@ -164,7 +164,14 @@ export class ContactList extends Component {
           </div>
           <Route
             path="/contact/add" component={AddContact}/>
-        </div>
+                 <div className="conatct-details-container">
+            <Route
+               exact
+             path="/:name"
+              component={ContactDetails}
+           />
+           </div>
+           </div>
       </BrowserRouter>
     );
   }
