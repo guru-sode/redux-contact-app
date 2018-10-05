@@ -38,7 +38,8 @@ class ContactDetails extends Component {
       birthday: values[1]
     };
     console.log(this.props.match.params.name)
-    this.props.EDIT_CONTACT(add,this.props.match.params.name)
+    this.props.EDIT_CONTACT(add,this.props.match.params.name);
+    this.props.FETCH_NAMES;
   }
 
   edit = () => {
@@ -53,7 +54,7 @@ class ContactDetails extends Component {
               id="name"
               placeholder="Enter name"
               name="name"
-              defaultValue={this.props.match.params.name}
+              defaultValue={this.props.personName}
             />
           </div>
           <div className="form-group">
@@ -107,7 +108,7 @@ class ContactDetails extends Component {
             <span className="avatar">
               <span className="typicons-user icon" />
               <span className="info">
-                {this.props.match.params.name}
+                {this.props.personName}
                 <br />
                 {this.props.birthday}
                 <br />
@@ -131,7 +132,7 @@ class ContactDetails extends Component {
 
 const mapStateToProps = state => {
   return {
-    personName: state.particularName,
+    personName: state.personName,
     home: state.home,
     mobile:state.mobile,
     birthday:state.birthday
@@ -140,6 +141,7 @@ const mapStateToProps = state => {
  
 const mapDispatchToProps = dispatch => {
   return {
+    FETCH_NAMES: dispatch({ type: 'FETCH_NAMES' }),
     CONTACT_DETAILS: (name) =>dispatch({type:'CONTACT_DETAILS',
     payload:name}),
     EDIT_CONTACT: (add,personName) => dispatch({type:'EDIT_CONTACT',payload:[add,personName]})

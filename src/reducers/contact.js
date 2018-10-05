@@ -10,7 +10,7 @@ const contactReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'FETCH_NAMES':
       const personName = [];
-      data.map(person => personName.push(person.name));
+      state.data.map(person => personName.push(person.name));
       return {
         ...state,
         name: personName
@@ -45,7 +45,7 @@ const contactReducer = (state = initialState, action) => {
         });
         return{
           ...state,
-          peerssonName:particularName,
+          personName:particularName,
           home:home,
           mobile:mobile,
           birthday:birthday
@@ -56,7 +56,7 @@ const contactReducer = (state = initialState, action) => {
               persons.name=action.payload[0].name;
               persons.numbers.home=action.payload[0].numbers.home;
               persons.numbers.mobile=action.payload[0].numbers.mobile;
-              persons.birthday=action.payload[0].numbers.birthday;
+              persons.birthday=action.payload[0].birthday;
           }
           return persons;
         });
